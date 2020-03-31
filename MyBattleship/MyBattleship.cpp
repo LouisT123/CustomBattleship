@@ -3,27 +3,28 @@
  * File: MyBattleship.cpp
  * Author: Louis Taing
  * Date: 03/27/2020
- * Description: Main function
+//Overview:
+//1.) Placement of 3 ships, checking for overlap, illegal shapes and directions
+//3.) Randomly generate enemy board
+//2.) Gameplay: Hitting/missing enemy ships and your ships getting hit/missed
+//3.) if fleetNumber = 0, closes program with win/loss
  */
 
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 
 //Global vector
-vector<string> input(36);
+vector<string> input(25);
 
 //functions
 void PlayGrid();
+void ShipPlacement();
 
 int main()
 {
-    //marker
-    string markerPlace = "SP";
-    string markerHit = "HT";
-    string markerMiss = "MT";
-
-
+ 
     cout << "Custom Battleship by Louis Taing" << endl << endl;
     cout << "Welcome to Battleship Captain!\n" << endl;
 
@@ -36,8 +37,8 @@ int main()
     cout << "HT represents a hit and MS represents a miss" << endl;
     cout << "Your ships may look something like this when placed on the grid: SP SP SP" << endl;
     cout << "You will have three ships at your disposal" << endl;
-    cout << "The aircraft carrier (5 spaces), the Battleship (4 spaces) and the Submarine (3 spaces)" << endl;
-    cout << "The playfield is a 6 x 6 grid labeled by 2 digit numbers to represent the spaces" << endl << endl;
+    cout << "The Destroyer (2 spaces), the Battleship (4 spaces) and the Submarine (3 spaces)" << endl;
+    cout << "The playfield is a 5 x 5 grid labeled by 2 digit numbers to represent the spaces" << endl << endl;
 
     string temp;
     cout << "Press enter to continue" << endl;
@@ -56,66 +57,77 @@ int main()
 
     //display grid
     PlayGrid();
-    //Aircraft carrier placement (CONCEPTUAL work in progress)
-    cout << endl << "Ok! Where would you like to place your aircraft carrier? (5 spaces)" << endl;
-    cout << "Please type the intial coordinates according to key (ie 02 or 30)" << endl;
-    int userPlacement;
-    cin >> userPlacement;
-
-    //int carrierSpaces = 5;
-    ////declare battleship and sub spaces and add to while
-    //while (carrierSpaces > 0)
-    //{
-    //    
-        if (userPlacement >= 0 && userPlacement < 36)
-        {
-            //Perform adjacent check here (function) (series all vert/all horiz as well as adjacent aka no snake ships)
-
-            //fill play grid
-            input[userPlacement] = markerPlace;
-            PlayGrid();
-          /*  carrierSpaces--;*/
-        }
-        else
-        {
-            cout << "valid integer in the range of 0 to 35 please" << endl;
-            //terminate temporary 
-            return 0;
-        }
-       
-   //}
-   
-    
+    //place ship and show on grid
+    ShipPlacement();
 }
 void PlayGrid()
 {
 
-    cout << "Key: " << endl;
-    cout << " 00 | 01 | 02 | 03 | 04 | 05 " << endl;
-    cout << "----------------------------" << endl;
-    cout << " 06 | 07 | 08 | 09 | 10 | 11 " << endl;
-    cout << "----------------------------" << endl;
-    cout << " 12 | 13 | 14 | 15 | 16 | 17 " << endl;
-    cout << "----------------------------" << endl;
-    cout << " 18 | 19 | 20 | 21 | 22 | 23 " << endl;
-    cout << "----------------------------" << endl;
-    cout << " 24 | 25 | 26 | 27 | 28 | 29 " << endl;
-    cout << "----------------------------" << endl;
-    cout << " 30 | 31 | 32 | 33 | 34 | 35 " << endl;
+    cout << "key: " << endl;
+    cout << " " << "a" << " | " << "b" << " | " << "c" << " | " << "d" << " | " << "e" <<  endl;
+    cout << "-------------------" << endl;
+    cout << " " << "f" << " | " << "g" << " | " << "h" << " | " << "i" << " | " << "j" << endl;
+    cout << "-------------------" << endl;
+    cout << " " << "k" << " | " << "l" << " | " << "m" << " | " << "n" << " | " << "o" << endl;
+    cout << "-------------------" << endl;
+    cout << " " << "p" << " | " << "q" << " | " << "r" << " | " << "s" << " | " << "t" << endl;
+    cout << "-------------------" << endl;
+    cout << " " << "u" << " | " << "v" << " | " << "w" << " | " << "x" << " | " << "y" << endl;
+    cout << "-------------------" << endl;
     cout << endl << endl;
 
     //Custom board needs alignment
     cout << "Battlefield: " << endl;
-    cout << "  " << input[0] << " | " << input[1] << " | " << input[2] << " | " << input[3] << " | " << input[4] << " | " << input[5] << endl;
-    //cout << " 06 | 07 | 08 | 09 | 10 | 11 " << endl;
-    //cout << "----------------------------" << endl;
-    //cout << " 12 | 13 | 14 | 15 | 16 | 17 " << endl;
-    //cout << "----------------------------" << endl;
-    //cout << " 18 | 19 | 20 | 21 | 22 | 23 " << endl;
-    //cout << "----------------------------" << endl;
-    //cout << " 24 | 25 | 26 | 27 | 28 | 29 " << endl;
-    //cout << "----------------------------" << endl;
-    //cout << " 30 | 31 | 32 | 33 | 34 | 35 " << endl;
+    cout << " " << input[0] << " | " << input[1] << " | " << input[2] << " | " << input[3] << " | " << input[4] << endl;
+    cout << "--------------" << endl;
+    cout << " " << input[5] << " | " << input[6] << " | " << input[7] << " | " << input[8] << " | " << input[9] << endl;
+    cout << "--------------" << endl;
+    cout << " " << input[10] << " | " << input[11] << " | " << input[12] << " | " << input[13] << " | " << input[14] << endl;
+    cout << "--------------" << endl;
+    cout << " " << input[15] << " | " << input[16] << " | " << input[17] << " | " << input[18] << " | " << input[19] << endl;
+    cout << "--------------" << endl;
+    cout << " " << input[20] << " | " << input[21] << " | " << input[22] << " | " << input[23] << " | " << input[24] << endl;
+    cout << "--------------" << endl;
+
 
 }
 
+void ShipPlacement()
+{
+    //marker
+    string markerPlace = "S";
+    string markerHit = "H";
+    string markerMiss = "M";
+
+    //Battleship Placement (CONCEPTUAL work in progress)
+   
+
+    //int battleshipSpaces = 5;
+    //////declare battleship and sub spaces and add to while
+    //while (battleshipSpaces > 0)
+    //{
+        cout << endl << "Ok! Where would you like to place your battleship? (4 spaces)" << endl;
+        cout << "Please type the intial coordinates according to key (ie a)" << endl;
+        int userPlacement;
+        cin >> userPlacement;
+
+        //if (userPlacement)
+        //{
+        //Perform adjacent check here (function) (series all vert/all horiz as well as adjacent aka no snake ships)
+
+        //fill play grid
+        input[userPlacement] = markerPlace;
+        PlayGrid();
+      /*  battleshipSpaces--;*/
+    //    }
+    //else
+    //    {
+    //    cout << "valid integer in the range of 0 to 25 please" << endl;
+    //    //terminate if wrong
+    //    return;
+    //    }
+
+    //}
+
+
+}
