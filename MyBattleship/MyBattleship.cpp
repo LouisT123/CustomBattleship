@@ -13,6 +13,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+//rng
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctime>
+
 using namespace std;
 
 //Global vector
@@ -57,22 +62,33 @@ int main()
 
     //display grid
     PlayGrid();
-    //place ship and show on grid
+    //fill player board w/ restrictions
     ShipPlacement();
+
+    //Use rng to fill enemy board with 3 ships (see old textbook)
+    //place ship and show on grid
+
+    //gameplay starts
 }
+void Rng()
+{
+   
+}
+
 void PlayGrid()
 {
 
+
     cout << "key: " << endl;
-    cout << " " << "a" << " | " << "b" << " | " << "c" << " | " << "d" << " | " << "e" <<  endl;
+    cout << " " << "00" << " | " << "01" << " | " << "02" << " | " << "03" << " | " << "04" << endl;
     cout << "-------------------" << endl;
-    cout << " " << "f" << " | " << "g" << " | " << "h" << " | " << "i" << " | " << "j" << endl;
+    cout << " " << "05" << " | " << "06" << " | " << "07" << " | " << "08" << " | " << "09" << endl;
     cout << "-------------------" << endl;
-    cout << " " << "k" << " | " << "l" << " | " << "m" << " | " << "n" << " | " << "o" << endl;
+    cout << " " << "10" << " | " << "11" << " | " << "12" << " | " << "13" << " | " << "14" << endl;
     cout << "-------------------" << endl;
-    cout << " " << "p" << " | " << "q" << " | " << "r" << " | " << "s" << " | " << "t" << endl;
+    cout << " " << "15" << " | " << "16" << " | " << "17" << " | " << "18" << " | " << "19" << endl;
     cout << "-------------------" << endl;
-    cout << " " << "u" << " | " << "v" << " | " << "w" << " | " << "x" << " | " << "y" << endl;
+    cout << " " << "20" << " | " << "21" << " | " << "22" << " | " << "23" << " | " << "24" << endl;
     cout << "-------------------" << endl;
     cout << endl << endl;
 
@@ -96,20 +112,23 @@ void ShipPlacement()
 {
     //marker
     string markerPlace = "S";
+    //Move to gameplay?
     string markerHit = "H";
     string markerMiss = "M";
 
-    //Battleship Placement (CONCEPTUAL work in progress)
-   
+    //(CONCEPTUAL work in progress)
 
-    //int battleshipSpaces = 5;
-    //////declare battleship and sub spaces and add to while
-    //while (battleshipSpaces > 0)
-    //{
+    int battleshipShipSpace = 4;
+
+    while (battleshipShipSpace > 0)
+    {
         cout << endl << "Ok! Where would you like to place your battleship? (4 spaces)" << endl;
-        cout << "Please type the intial coordinates according to key (ie a)" << endl;
+        cout << "Please type the intial coordinates according to key (integer 0 - 24)" << endl;
         int userPlacement;
         cin >> userPlacement;
+
+        
+        //if (userPlacement <= 25 && userPlacement >= 0) perform int range check and duplicate input check (userplacement != old userplacement)
 
         //if (userPlacement)
         //{
@@ -118,16 +137,55 @@ void ShipPlacement()
         //fill play grid
         input[userPlacement] = markerPlace;
         PlayGrid();
-      /*  battleshipSpaces--;*/
-    //    }
-    //else
-    //    {
-    //    cout << "valid integer in the range of 0 to 25 please" << endl;
-    //    //terminate if wrong
-    //    return;
-    //    }
+        battleshipShipSpace--;
+ 
 
-    //}
+    }
+    cout << "Well placed captain!" << endl;
+    cout << "Now for the Submarine" << endl;
 
+    int subShipSpace = 3;
+    while (subShipSpace > 0)
+    {
+        cout << endl << "Ok! Where would you like to place your Submarine? (3 spaces)" << endl;
+        cout << "Please type the intial coordinates according to key (integer 0 - 24)" << endl;
+        int userPlacement;
+        cin >> userPlacement;
 
+        //if (userPlacement < 0 || userPlacement > 25) perform int range check
+        //if (userPlacement)
+        //{
+        //Perform adjacent check here (function) (series all vert/all horiz as well as adjacent aka no snake ships)
+
+        //fill play grid
+        input[userPlacement] = markerPlace;
+        PlayGrid();
+        subShipSpace--;
+
+    }
+
+    cout << "Well placed captain!" << endl;
+    cout << "Now for the Destroyer" << endl;
+
+    int destroyerShipSpace = 2;
+    while (destroyerShipSpace > 0)
+    {
+        cout << endl << "Ok! Where would you like to place your destroyer? (2 spaces)" << endl;
+        cout << "Please type the intial coordinates according to key (integer 0 - 24)" << endl;
+        int userPlacement;
+        cin >> userPlacement;
+
+        //if (userPlacement < 0 || userPlacement > 25) perform int range check
+        //if (userPlacement)
+        //{
+        //Perform adjacent check here (function) (series all vert/all horiz as well as adjacent aka no snake ships)
+
+        //fill play grid
+        input[userPlacement] = markerPlace;
+        PlayGrid();
+        destroyerShipSpace--;
+
+    }
+    cout << "Well placed captain!" << endl;
+    cout << "Now its time to play!" << endl;
 }

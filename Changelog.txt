@@ -1,0 +1,11 @@
+6/19/20
+-added working loops for all 3 ship placements (input is now numbers not letters)
+-typos
+-intial planning
+
++Need to add range check for cin int (0 to 24)
++Need to add duplicate number check
++refactor ShipPlacement()
++Study RNG for filling enemy board with ships
++Study tic tac toe for hit / miss detection  (change S to H or M based on equal to placement or not)
++Figure out how to allow only adjacent spaces (complex)
